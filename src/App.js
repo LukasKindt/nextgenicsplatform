@@ -1,11 +1,11 @@
 import './App.css';
 import {Route} from 'react-router-dom';
-import Multistepform from './components/Multistepform';
+import SignInUpProcess from './components/SignInUpProcess';
 
 function App() {
   return (
     <div className="App">
-      <Route path='/' component={Multistepform} />
+      <Route path='/' component={SignInUpProcess} />
     </div>
   );
 }

@@ -7,7 +7,6 @@ import 'react-intl-tel-input/dist/main.css'
 const useStyles = makeStyles({
     formContainer: {
         position: 'relative',
-        width: '28.125rem',
         height: 'auto',
         padding: '2rem',
     },

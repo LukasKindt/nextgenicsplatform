@@ -120,10 +120,6 @@ class Multistepform extends Component {
     render(){
         return (
             <div className='root'>
-                {/*<img className="logo" src="../assets/logo.png" alt="Forcit"/>*/}
-                <section className='homeLeft'>
-                    <h1>Welcome to Forcit</h1>
-                </section>
                 <section className='stepForm'>
                 <Stepper activeStep={this.state.activeStep} alternativeLabel>
                     {this.steps.map(label => (

@@ -38,13 +38,13 @@ export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValu
     const classes = useStyles();
 
     return (
-        <div className="mainContainer" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+        <div className="mainContainer formTask" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
             {console.log(formValues.task)}
             <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>What is your task?</Typography>
             <div className={classes.formContainer}>
             {!disabled? (
             <Button className='backBtn' onClick={handlePrev}>Back</Button>
-                ):(<></>)}
+            ):null}
             <div className='radioButtons'>
 
                 <input type='radio' id='management' name='task' value='management' onChange={e => {handleChange('task', e)}}></input>
@@ -69,7 +69,7 @@ export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValu
                             <Button className='disabledBtn' disabled type='submit'>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
                         ): (
                             <Button className='nextBtn' type='submit' onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
-                        )) : (<></>)
+                        )) : null
                     }
               
             </div>

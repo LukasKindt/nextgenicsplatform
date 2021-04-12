@@ -11,30 +11,12 @@ import 'react-intl-tel-input/dist/main.css'
 const useStyles = makeStyles({
     formContainer: {
         position: 'relative',
-        width: '28.125rem',
         height: 'auto',
         padding: '2rem',
     },
     inputField: {
         width: '100%',
         marginBottom: '1rem'
-    },
-    btn: {
-        width: '100%',
-        height: '3rem',
-        background: 'red',
-        color: '#fff',
-        marginBottom: '1rem',
-        '&:hover': {
-            color: 'red',
-            opacity: '.7',
-            transition: '.3s ease-in-out'
-        }
-    },
-    disabledBtn: {
-        background: "rgba(0,0,0,0.38)",
-        width: "100%",
-        height: '3rem'
     }
 })
 
@@ -81,12 +63,12 @@ export const FormPassword = ({activeStep, steps, handleNext, handlePrev, handleC
     const classes = useStyles();
 
     return (
-        <div className="mainContainer" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+        <div className="mainContainer formPassword" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
             <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>Please select a strong password!</Typography>
             <div className={classes.formContainer}>
             {!disabled? (
-            <Button className={classes.btn} onClick={handlePrev}>Back</Button>
-                ):(<></>)}
+            <Button className='backBtn' onClick={handlePrev}>Back</Button>
+            ):null}
            
                     <FormControl className={classes.inputField} variant='outlined'>
                         <InputLabel>Password</InputLabel>
@@ -117,10 +99,10 @@ export const FormPassword = ({activeStep, steps, handleNext, handlePrev, handleC
                     {
                         !disabled ? (
                         errors.password || errors.confirmPassword || confirmPassword !== password ? (
-                            <Button className={classes.btn} variant='contained' disabled type='submit' endIcon={<BlockSharpIcon />}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
+                            <Button className="disabledBtn" disabled type='submit'>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
                         ): (
-                            <Button className={classes.btn} variant='contained' type='submit' onClick={handleNext} endIcon={<SendSharpIcon />}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
-                        )):(<></>)
+                            <Button className="nextBtn" type='submit' onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
+                        )) : null
                     }
                
             </div>

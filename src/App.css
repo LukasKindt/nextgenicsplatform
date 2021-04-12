@@ -25,11 +25,25 @@ html > body {
 
 .stepForm{
   width: 100%;
+  max-height: 100vh;
 }
 
 .multiStepForm{
   width: 100%;
-  max-height: 100vh;
+
+}
+
+.stepFormUnderStepper{
+  height: 100%;
+  overflow: scroll;
+}
+
+.formEmail{
+  padding-top: 40vh;
+}
+
+.formTerms{
+  padding-bottom: 35vh;
 }
 
 @keyframes fadeinout{
@@ -60,6 +74,7 @@ html > body {
 
 .homeRight{
   width: 50%;
+  max-height: 100vh;
   background-image: url('./assets/background.png');
   background-position: top right;
   background-repeat: no-repeat;
@@ -77,8 +92,8 @@ html > body {
   line-height: 35px;
 }
 
-.radioButtons{
-  margin-bottom: 1rem;
+.radioButtons, .checkBoxes{
+  margin-bottom: 2.7rem;
 }
 
 .radioButtons input[type="radio"] {
@@ -154,21 +169,23 @@ html > body {
   justify-content: flex-start;
 }
 
-.formRegister{
+.formRegister, .formHome{
   width: 100%;
   max-height: 100vh;
   display: flex;
   align-items: center;
 }
 
-.formRegister .mainContainer{
+.formRegister .mainContainer, .formHome .mainContainer{
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
+  justify-content: center;
   align-items: center;
 }
 
-.formRegister .mainContainer h5{
+.formRegister .mainContainer h5, .formHome .mainContainer h5{
   width: 80%;
   text-align: left !important;
   margin-bottom: 0.5rem;
@@ -235,4 +252,39 @@ html > body {
 
 .MuiTextField-root{
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+@media only screen and (max-width: 768px) {
+  /*.homeLeft{
+    visibility: hidden !important;
+    display: none !important;
+  }*/
+
+  .logo{
+    z-index: 3;
+    top: 4rem;
+    left: 0.5rem;
+  }
+
+  .homeLeft{
+    position: absolute;
+    top: 0;
+    height: 20vh;
+    background-color: #19304E;
+    background-image: none;
+    z-index: 2;
+  }
+
+  .homeLeft h1{
+    visibility: hidden;
+  }
+
+  .homeRight{
+    width: 100%;
+    z-index: 1;
+  }
+
+  .radioButtons label{
+    width: 45%;
+  }
 }

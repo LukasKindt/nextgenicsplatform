@@ -1,6 +1,8 @@
 import React from 'react'
 import { Component } from 'react';
 import Multistepform from './Multistepform';
+import FormHome from './FormHome';
+//import FormLogin from './FormLogin';
 import LogInSignUp from './LogInSignUp';
 import FormRegister from './FormRegister';
 import ManagerTeamMember from './ManagerTeamMember';
@@ -14,10 +16,8 @@ class SignInUpProcess extends Component {
     //multistepform (manager)   ->  formLogin, formRegister, manager: true
     //teamMemberForm            ->  formLogin, formRegister, teamMember: true
     state = {
-        loginActive: true,
-        registerActive: true,
-        manager: true,
-        teamMember: false
+        home: true,
+        registerActive: false,
     }
 
     handleLogIn = () => {
@@ -55,6 +55,19 @@ class SignInUpProcess extends Component {
         })
     }
 
+    handleCheck = () => {
+        /*if (email already exists in database){
+            this.setState({
+                home: false,
+                register: false
+            })
+        } else*/
+        this.setState({
+            home:false,
+            register: true
+        })
+    }
+
     render(){
         return (
             <div className='root'>
@@ -64,7 +77,7 @@ class SignInUpProcess extends Component {
                 </section>
                 <section className='homeRight'>
 
-                {
+                {/*
                     this.state.registerActive && !this.state.loginActive ? (
                         <section className="formRegister"><FormRegister handleContinue={this.handleContinue}/></section>
                     ):(
@@ -76,7 +89,7 @@ class SignInUpProcess extends Component {
 
                             this.state.loginActive && this.state.registerActive ? (
                                 this.state.manager ? (
-                                    <section class="multiStepForm"><Multistepform/></section>
+                                    <section className="multiStepForm"><Multistepform/></section>
                                     
                                 ):(
 
@@ -98,7 +111,18 @@ class SignInUpProcess extends Component {
                             )
                         )
                     )
-                }
+                            */
+                            this.state.home ? (
+                                <section className="formHome"><FormHome handleCheck={this.handleCheck}/></section>
+                            ):(
+                                this.state.register ? (
+                                    <section className="multiStepForm"><Multistepform/></section>
+                                ):(
+                                    <p>login</p>
+                                    //<section className="formLogin"><FormLogin/></section>
+                                )
+                            )
+                        }
                 </section>
             </div>
         )

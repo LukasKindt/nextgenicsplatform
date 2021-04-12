@@ -5,6 +5,7 @@ import FormPlatformName from './FormPlatformName'
 import FormEmail from './FormEmail'
 import FormPassword from './FormPassword'
 import FormTask from './FormTask'
+import FormTerms from './FormTerms'
 import { Component } from 'react';
 
 class Multistepform extends Component {
@@ -15,14 +16,16 @@ class Multistepform extends Component {
             firstName: '',
             lastName: '',
             //platformName: '',
-            //password: '',
-            //confirmPassword: '',
-            task: ''
+            password: '',
+            confirmPassword: '',
+            task: '',
+            terms: false,
+            cookies: false
         }
 
 
     getSteps(){
-        return ["EMAIL", "NAME", "TASK"];
+        return ["EMAIL", "NAME", "PASSWORD", "TASK", "TERMS"];
     }
 
     handleNext = () => {
@@ -31,12 +34,25 @@ class Multistepform extends Component {
             activeStep: this.state.activeStep + 1
         })//}, 500);
 
+        const element = document.getElementById('stepFormUnderStepper');
+        element.scrollBy({
+            top: 232,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     handlePrev = () => {
         this.setState({
             activeStep: this.state.activeStep - 1
         })
+
+        const element = document.getElementById('stepFormUnderStepper');
+        element.scrollBy({
+            top: -232,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     handleChange = (field, e) => {
@@ -48,80 +64,127 @@ class Multistepform extends Component {
     handleSubmit = () => {
         console.log("submit everything!")
     }
+
+    triggerTerms = () => (
+        console.log(this.state),
+        this.setState({
+            terms: !this.state.terms,
+        }),console.log(this.state)
+    )
+
+    triggerCookies = () => (
+        console.log(this.state),
+        this.setState({
+            cookies: !this.state.cookies,
+        }),console.log(this.state)
+    )
     
     steps = this.getSteps();
     
     getStepsContent(stepIndex){
-        const {email, firstName, lastName, task} = this.state;
-        const values = {email, firstName, lastName, task}
+        const {email, firstName, lastName, password, confirmPassword, task, terms, cookies} = this.state;
+        const values = {email, firstName, lastName, password, confirmPassword, task, terms, cookies}
         console.log(values)
-        switch(stepIndex){
-            case 0: 
-                return <div>
-                    <FormEmail 
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>
-                    {<FormName disabled
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handlePrev={this.handlePrev}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>}
-                    </div>
-            case 1:
-                return <div>
-                    {<FormEmail disabled
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>}
-                    <FormName
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handlePrev={this.handlePrev}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>
-                    {<FormTask disabled
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handlePrev={this.handlePrev}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>}
-                    </div>
-            case 2:
-                return <div>
-                    {<FormName disabled
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handlePrev={this.handlePrev}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>}
-                    <FormTask
-                    handleChange={this.handleChange}
-                    formValues={values}
-                    handlePrev={this.handlePrev}
-                    handleNext={this.handleNext}
-                    activeStep={this.state.activeStep}
-                    steps={this.steps}/>
-                    </div>
-            default:
-                return 'Something went wrong, please contact support!'
-        }
+        return <div>
+                    {stepIndex != 0 ? (
+                        <FormEmail disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    ):(
+                        <FormEmail
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    )}
+
+                    {stepIndex != 1 ? (
+                        <FormName disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    ):(
+                        <FormName 
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    )}
+
+                    {stepIndex != 2 ? (
+                        <FormPassword disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    ):(
+                        <FormPassword
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    )}
+
+                    {stepIndex != 3 ? (
+                        <FormTask disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    ):(
+                        <FormTask
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    )}
+                    
+                    {stepIndex != 4 ? (
+                        <FormTerms disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        triggerCookies={this.triggerCookies}
+                        triggerTerms={this.triggerTerms}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    ):(
+                        <FormTerms
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        triggerCookies={this.triggerCookies}
+                        triggerTerms={this.triggerTerms}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}/>
+                    )}
+                </div>
     }
 
     render(){
         return (
             <div className='root'>
                 <section className='stepForm'>
-                <Stepper activeStep={this.state.activeStep} alternativeLabel>
+                {/*<Stepper activeStep={this.state.activeStep} alternativeLabel>
                     {this.steps.map(label => (
                         <Step key={label}>
                             <StepLabel>
@@ -129,8 +192,8 @@ class Multistepform extends Component {
                             </StepLabel>
                         </Step>
                     ))}
-                    </Stepper>
-                <>
+                    </Stepper>*/}
+                <article className='stepFormUnderStepper' id='stepFormUnderStepper'>
                     {this.state.activeStep === this.steps.length ? (
                         <>
                         "You have succesfully completed the registration!"
@@ -141,7 +204,7 @@ class Multistepform extends Component {
                             {this.getStepsContent(this.state.activeStep)}
                         </>
                     )}
-                </>
+                </article>
                 </section>
             </div>
         )

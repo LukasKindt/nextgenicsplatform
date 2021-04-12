@@ -68,7 +68,7 @@ export const FormName = ({activeStep, steps, handleNext, handlePrev, handleChang
                             <Button className="disabledBtn" disabled type='submit'>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
                         ): (
                             <Button className="nextBtn" type='submit' onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
-                        )):(<></>)
+                        )):null
                     }
       
             </div>

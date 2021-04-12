@@ -40,10 +40,9 @@ export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValu
     const classes = useStyles();
 
     return (
-        <div className="mainContainer" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+        <div className="mainContainer formEmail" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
             <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>What is your email?</Typography>
             <div className={classes.formContainer}>
-          
                     <TextField className={classes.inputField} label='Email' variant='outlined' name="email" value={email} onChange={e => {handleOnChange(e); handleChange('email', e)}} />
                     {errors.email && dirty.email && (
                         <Typography style={{marginTop: '0', color: 'red', fontWeight: '200'}}>{errors.email}</Typography>

@@ -82,7 +82,7 @@ class SignInUpProcess extends Component {
                 <img src="../assets/logo.png" alt="Forcit" className="logo"/>
                 <section className='homeLeft'>
                     <section class="leftText">
-                        <img src="../assets/circle.png" alt="Circle" className="homeLeftCircle"/>
+                        <img src="../assets/Circle.png" alt="Circle" className="homeLeftCircle"/>
                         <h1>Welcome to Forcit</h1>
                     </section>
                 </section>

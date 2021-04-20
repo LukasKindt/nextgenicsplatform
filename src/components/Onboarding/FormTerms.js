@@ -18,22 +18,23 @@ const useStyles = makeStyles({
     }
 })
 
-export const FormTerms = ({activeStep, steps, handleNext, handlePrev, formValues, disabled, handleChange, triggerTerms, triggerCookies}) => {
+export const FormTerms = ({activeStep, steps, handleNext, handlePrev, formValues, disabled, handleChange, triggerTerms, triggerCookies, handleOnClick}) => {
+
+    const step = 6;
+    const shown = activeStep > step;
 
     const stateSchema = {
-        terms: {value: formValues.terms, error: ""},
-        cookies: {value: formValues.cookies, error: ""}
     }
 
     const classes = useStyles();
 
     return (
-        <div className="mainContainer formTerms" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
-            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>Please accept the following:</Typography>
+        <div className="mainContainer formTerms" onClick={e => {handleOnClick(step)}} style={disabled ? (shown ? ({ opacity: "0.2"}): ({opacity: "0"})) : {}}>
+            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>{"Please tick the following boxes to show you accept them"}</Typography>
             <div className={classes.formContainer}>
-            {!disabled? (
+            {/*!disabled? (
             <Button className="backBtn" onClick={handlePrev}>Back</Button>
-                ):null}
+            ):null*/}
             <section className='checkBoxes'>
             <br/>
             <input type='checkbox' id='terms' name="terms" value='terms' onChange={triggerTerms}></input><label for="terms">Accept to our Terms &amp; Regulations and Privacy Policy</label>

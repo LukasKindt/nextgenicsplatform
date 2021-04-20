@@ -1,4 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+@import url(http://fonts.googleapis.com/css?family=Poppins:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+
+
 
 .intl-tel-input.allow-dropdown input,
 .intl-tel-input.allow-dropdown input[type=text],
@@ -12,16 +15,11 @@
 
 html > body {
   margin: 0;
+  font-family: Roboto;
+  overflow:  hidden;
 }
 
 .root{display: flex;}
-
-.mainContainer{
-    justify-content: center;
-    position: relative;
-    z-index: 5;
-    /*animation: fadeinout 1s none;*/
-}
 
 .stepForm{
   width: 100%;
@@ -35,11 +33,11 @@ html > body {
 
 .stepFormUnderStepper{
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 .formEmail{
-  padding-top: 40vh;
+  padding-top: 60vh;
 }
 
 .formTerms{
@@ -63,13 +61,14 @@ html > body {
 .homeLeft{
   display: flex;
   width: 50% !important;
-  align-items: center;
+  
   justify-content: flex-end;
   background-image:
     linear-gradient(45.96deg, rgba(0, 220, 255, 0.25) 0%, rgba(255, 255, 255, 0.25) 99.33%),
     linear-gradient(220.47deg, rgba(0, 220, 255, 0.25) -108.16%, rgba(29, 247, 124, 0.25) -8.16%),
     url('./assets/teamfoto.png');
   height: 100vh;
+  max-height: 100vh;
 }
 
 .homeRight{
@@ -80,10 +79,18 @@ html > body {
   background-repeat: no-repeat;
 }
 
-.homeLeft h1 {
-  text-align: left;
-  padding: 3.6rem 5.3rem 6.7rem 2.5rem;
+.leftText{
+  height: 12rem;
+  width: 24rem;
+  margin-top: 60vh;
   background-color: #19304E;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.leftText h1 {
+  text-align: left;
+  padding-left: 6rem;
+  padding-top: 1rem;
   color: white;
   font-family: Roboto;
   font-style: normal;
@@ -92,8 +99,12 @@ html > body {
   line-height: 35px;
 }
 
-.radioButtons, .checkBoxes{
-  margin-bottom: 2.7rem;
+.radioButtons{
+  margin-bottom: 0.8rem;
+}
+
+.checkBoxes{
+  margin-bottom: 0.8rem;
 }
 
 .radioButtons input[type="radio"] {
@@ -181,8 +192,8 @@ html > body {
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
+  padding-top: 120vh;
+  margin-left: 2rem;
 }
 
 .formRegister .mainContainer h5, .formHome .mainContainer h5{
@@ -254,6 +265,10 @@ html > body {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
+.emailinput{
+  display: flex;
+}
+
 @media only screen and (max-width: 768px) {
   /*.homeLeft{
     visibility: hidden !important;
@@ -275,7 +290,7 @@ html > body {
     z-index: 2;
   }
 
-  .homeLeft h1{
+  .leftText h1{
     visibility: hidden;
   }
 
@@ -287,4 +302,30 @@ html > body {
   .radioButtons label{
     width: 45%;
   }
+}
+
+.pageContent{
+  width: 85%;
+}
+
+.platform{
+  display: flex;
+}
+
+.domain{
+  color: #19304E;
+  font-family: Poppins;
+}
+
+.homeForm{
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.homeLeftCircle{
+  margin-left: 4rem;
+  margin-top: -2rem;
+  width: 4rem;
+  height: 4rem;
 }

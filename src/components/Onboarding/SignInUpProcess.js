@@ -18,6 +18,7 @@ class SignInUpProcess extends Component {
     state = {
         home: true,
         registerActive: false,
+        email: '',
     }
 
     handleLogIn = () => {
@@ -64,16 +65,26 @@ class SignInUpProcess extends Component {
         } else*/
         this.setState({
             home:false,
-            register: true
+            register: true,
+        })
+    }
+
+    handleChange = (field, e) => {
+        this.setState({
+            [field]: e.target.value
         })
     }
 
     render(){
         return (
             <div className='root'>
-                {<img src="../assets/logo.png" alt="Forcit" className="logo"/>}
+                {console.log(this.state.email)}
+                <img src="../assets/logo.png" alt="Forcit" className="logo"/>
                 <section className='homeLeft'>
-                    <h1>Welcome to Forcit</h1>
+                    <section class="leftText">
+                        <img src="../assets/circle.png" alt="Circle" className="homeLeftCircle"/>
+                        <h1>Welcome to Forcit</h1>
+                    </section>
                 </section>
                 <section className='homeRight'>
 
@@ -113,10 +124,10 @@ class SignInUpProcess extends Component {
                     )
                             */
                             this.state.home ? (
-                                <section className="formHome"><FormHome handleCheck={this.handleCheck}/></section>
+                                <section className="formHome"><FormHome handleCheck={this.handleCheck} handleChange={this.handleChange}/></section>
                             ):(
                                 this.state.register ? (
-                                    <section className="multiStepForm"><Multistepform/></section>
+                                    <section className="multiStepForm"><Multistepform email={this.state.email}/></section>
                                 ):(
                                     <p>login</p>
                                     //<section className="formLogin"><FormLogin/></section>

@@ -1,18 +1,21 @@
 import React from 'react'
 import {Stepper, Step, StepLabel} from "@material-ui/core";
-import FormName from './FormName'
-import FormPlatformName from './FormPlatformName'
+import FormFirstName from './FormFirstName'
+import FormLastName from './FormLastName'
 import FormEmail from './FormEmail'
 import FormPassword from './FormPassword'
+import FormConfirmPassword from './FormConfirmPassword'
 import FormTask from './FormTask'
 import FormTerms from './FormTerms'
 import { Component } from 'react';
 
-class Multistepform extends Component {
+//export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValues, disabled, handlePrev}) => {
+class Multistepform extends Component{
 
         state = {
             activeStep: 0,
-            email: '',
+            email: this.props.email.split("@")[0],
+            domain: this.props.email.split("@")[1],
             firstName: '',
             lastName: '',
             //platformName: '',
@@ -25,21 +28,28 @@ class Multistepform extends Component {
 
 
     getSteps(){
-        return ["EMAIL", "NAME", "PASSWORD", "TASK", "TERMS"];
+        return ["EMAIL", "FIRST NAME", "LAST NAME", "PASSWORD", "CONFIRM PASSWORD", "TASK", "TERMS"];
     }
 
     handleNext = () => {
-        //setTimeout(() => {
             this.setState({
             activeStep: this.state.activeStep + 1
-        })//}, 500);
+        })
 
         const element = document.getElementById('stepFormUnderStepper');
         element.scrollBy({
-            top: 232,
+            top: 168,
             left: 0,
-            behavior: 'smooth'
         });
+
+        //var tabEvent = new KeyboardEvent({'keydown' : {'keyCode': 9, 'which': 9}});
+        //document.dispatchEvent(tabEvent);
+
+        /*var inputs = document.getElementsByClassName("onboardingField");
+        var nextInput=inputs.get(inputs.index(this)+1);
+        if (nextInput) {
+            nextInput.focus();
+         }*/
     }
 
     handlePrev = () => {
@@ -49,9 +59,9 @@ class Multistepform extends Component {
 
         const element = document.getElementById('stepFormUnderStepper');
         element.scrollBy({
-            top: -232,
+            top: -168,
             left: 0,
-            behavior: 'smooth'
+           
         });
     }
 
@@ -78,12 +88,29 @@ class Multistepform extends Component {
             cookies: !this.state.cookies,
         }),console.log(this.state)
     )
+
+    handleOnClick = (formpart) => {
+        console.log(formpart)
+        if (formpart < this.state.activeStep){
+            const diff = this.state.activeStep - formpart
+            const element = document.getElementById('stepFormUnderStepper');
+            element.scrollBy({
+                top: -168*diff,
+                left: 0,
+                behavior: 'smooth'
+            });
+            this.setState({
+                activeStep: formpart
+            })
+        }
+    }
     
     steps = this.getSteps();
     
     getStepsContent(stepIndex){
-        const {email, firstName, lastName, password, confirmPassword, task, terms, cookies} = this.state;
-        const values = {email, firstName, lastName, password, confirmPassword, task, terms, cookies}
+        console.log(this.props)
+        const {email, firstName, lastName, password, confirmPassword, task, terms, cookies, domain} = this.state;
+        const values = {email, firstName, lastName, password, confirmPassword, task, terms, cookies, domain}
         console.log(values)
         return <div>
                     {stepIndex != 0 ? (
@@ -92,42 +119,67 @@ class Multistepform extends Component {
                         formValues={values}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick} />
                     ):(
                         <FormEmail
                         handleChange={this.handleChange}
                         formValues={values}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     )}
 
                     {stepIndex != 1 ? (
-                        <FormName disabled
+                        <FormFirstName disabled
                         handleChange={this.handleChange}
                         formValues={values}
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     ):(
-                        <FormName 
+                        <FormFirstName 
                         handleChange={this.handleChange}
                         formValues={values}
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     )}
 
                     {stepIndex != 2 ? (
+                        <FormLastName disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
+                    ):(
+                        <FormLastName 
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
+                    )}
+
+                    {stepIndex != 3 ? (
                         <FormPassword disabled
                         handleChange={this.handleChange}
                         formValues={values}
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     ):(
                         <FormPassword
                         handleChange={this.handleChange}
@@ -135,17 +187,39 @@ class Multistepform extends Component {
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     )}
 
-                    {stepIndex != 3 ? (
+                    {stepIndex != 4? (
+                        <FormConfirmPassword disabled
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
+                    ):(
+                        <FormConfirmPassword
+                        handleChange={this.handleChange}
+                        formValues={values}
+                        handlePrev={this.handlePrev}
+                        handleNext={this.handleNext}
+                        activeStep={this.state.activeStep}
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
+                    )}
+
+                    {stepIndex != 5 ? (
                         <FormTask disabled
                         handleChange={this.handleChange}
                         formValues={values}
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     ):(
                         <FormTask
                         handleChange={this.handleChange}
@@ -153,10 +227,11 @@ class Multistepform extends Component {
                         handlePrev={this.handlePrev}
                         handleNext={this.handleNext}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     )}
                     
-                    {stepIndex != 4 ? (
+                    {stepIndex != 6 ? (
                         <FormTerms disabled
                         handleChange={this.handleChange}
                         formValues={values}
@@ -165,7 +240,8 @@ class Multistepform extends Component {
                         triggerCookies={this.triggerCookies}
                         triggerTerms={this.triggerTerms}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     ):(
                         <FormTerms
                         handleChange={this.handleChange}
@@ -175,7 +251,8 @@ class Multistepform extends Component {
                         triggerCookies={this.triggerCookies}
                         triggerTerms={this.triggerTerms}
                         activeStep={this.state.activeStep}
-                        steps={this.steps}/>
+                        steps={this.steps}
+                        handleOnClick={this.handleOnClick}/>
                     )}
                 </div>
     }
@@ -184,7 +261,7 @@ class Multistepform extends Component {
         return (
             <div className='root'>
                 <section className='stepForm'>
-                {/*<Stepper activeStep={this.state.activeStep} alternativeLabel>
+                {/*<Stepper className='stepper' activeStep={this.state.activeStep} alternativeLabel>
                     {this.steps.map(label => (
                         <Step key={label}>
                             <StepLabel>

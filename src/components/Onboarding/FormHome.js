@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
 })
 
-export const FormHome = ({handleCheck}) => {
+export const FormHome = ({handleCheck, handleChange}) => {
     const stateSchema = {
         email: {value: "", error: ""},
     }
@@ -40,10 +40,18 @@ export const FormHome = ({handleCheck}) => {
 
     const classes = useStyles();
 
+    const onKeyDownHandler = e => {
+        if (e.keyCode === 13) {
+          if (!errors.email){
+              handleCheck()
+          }
+        }
+      };
+
     return (
         <div className="mainContainer">
             <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>What is your Email?</Typography>
-            <TextField className={classes.inputField} label='Email' name="email" onChange={e => {handleOnChange(e)}} />
+            <TextField autoFocus className={classes.inputField} label='Email' name="email" onChange={e => {handleOnChange(e); handleChange('email', e)}} onKeyDown={onKeyDownHandler} />
                     {errors.email && dirty.email && (
                         <Typography style={{color: "red", textAlign: "start", width: '80%'}}>{errors.email}</Typography>
                     )}

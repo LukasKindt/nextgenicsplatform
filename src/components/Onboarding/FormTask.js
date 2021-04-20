@@ -16,10 +16,13 @@ const useStyles = makeStyles({
     },
 })
 
-export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValues, disabled, handlePrev}) => {
+export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValues, disabled, handlePrev, handleOnClick}) => {
     const stateSchema = {
         task: {value: formValues.task, error: ""}
     }
+
+    const step = 5;
+    const shown = activeStep > step;
 
     const stateValidatorSchema = {
         task: {
@@ -38,13 +41,13 @@ export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValu
     const classes = useStyles();
 
     return (
-        <div className="mainContainer formTask" style={disabled ? {pointerEvents: "none", opacity: "0.4"} : {}}>
+        <div className="mainContainer formTask" onClick={e => {handleOnClick(step)}} style={disabled ? (shown ? ({ opacity: "0.2"}): ({opacity: "0"})) : {}}>
             {console.log(formValues.task)}
-            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>What is your task?</Typography>
+            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>{"We're almost there, we just need to know your main task!"}</Typography>
             <div className={classes.formContainer}>
-            {!disabled? (
+            {/*!disabled? (
             <Button className='backBtn' onClick={handlePrev}>Back</Button>
-            ):null}
+            ):null*/}
             <div className='radioButtons'>
 
                 <input type='radio' id='management' name='task' value='management' onChange={e => {handleChange('task', e)}}></input>

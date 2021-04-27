@@ -344,3 +344,12 @@ html > body {
   width: 4rem;
   height: 4rem;
 }
+
+.titanic{
+  width: 100%
+}
+
+.titanicDashboard{
+  width: 100%;
+  height: 45rem;
+}

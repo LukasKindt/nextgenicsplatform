@@ -122,8 +122,8 @@ export const OversightData = [
     cName: 'pag-text'
   },
   {
-    title: 'Oversight Tab 4',
-    path: '/oversight/tab4',
+    title: 'Titanic',
+    path: '/oversight/titanic',
     cName: 'pag-text'
   }
 ];

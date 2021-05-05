@@ -6,13 +6,14 @@ import Foresight from './Pages/Foresight';
 import Insight from './Pages/Insight';
 import Oversight from './Pages/Oversight';
 import Hindsight from './Pages/Hindsight';
+import Titanic from './Pages/Titanic';
 
 function App() {
   return (
-    <div className="App">
+    /*<div className="App">
       <Route path='/' component={SignInUpProcess} />
-    </div>
-    /*<div class="platform">
+    </div>*/
+    <div class="platform">
     <Router>
     <Switch>
           <Route path="/:id" children={<Navbar />} />
@@ -22,6 +23,7 @@ function App() {
       <div className='navbar'>
         </div>
       <Switch>
+        <Route path='/oversight/titanic' component={Titanic}/>
         <Route path='/foresight' component={Foresight} />
         <Route path='/insight' component={Insight} />
         <Route path='/oversight' component={Oversight} />
@@ -29,7 +31,7 @@ function App() {
       </Switch>
       </div>
     </Router>
-  </div>*/
+  </div>
   );
 }
 

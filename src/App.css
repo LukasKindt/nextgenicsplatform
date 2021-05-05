@@ -31,7 +31,8 @@
 html > body {
   margin: 0;
   font-family: Roboto;
-  overflow:  hidden;
+
+  background-color: #E7E7E7;
 }
 
 .root{display: flex;}
@@ -321,10 +322,12 @@ html > body {
 
 .pageContent{
   width: 85%;
+  overflow: scroll;
 }
 
 .platform{
   display: flex;
+  justify-content: flex-end;
 }
 
 .domain{
@@ -345,11 +348,15 @@ html > body {
   height: 4rem;
 }
 
-.titanic{
-  width: 100%
-}
-
 .titanicDashboard{
   width: 100%;
-  height: 45rem;
+  height: 55rem;
+}
+
+.pageSection{
+  background-color: white;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 3px 5px 4px #bbbbbb;
 }

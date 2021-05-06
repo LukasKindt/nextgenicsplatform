@@ -32,7 +32,7 @@ html > body {
   margin: 0;
   font-family: Roboto;
 
-  background-color: #E7E7E7;
+  background-color: white;
 }
 
 .root{display: flex;}
@@ -321,7 +321,7 @@ html > body {
 }
 
 .pageContent{
-  width: 85%;
+  width: 88%;
   overflow: scroll;
 }
 

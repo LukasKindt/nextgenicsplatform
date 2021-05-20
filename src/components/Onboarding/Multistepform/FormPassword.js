@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import useForm from './useForm'
+import useForm from '../useForm'
 import {makeStyles} from '@material-ui/core/styles';
 import {Typography, Button, OutlinedInput, FormControl, InputLabel, InputAdornment, IconButton} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
@@ -20,12 +20,12 @@ const useStyles = makeStyles({
     }
 })
 
-export const FormConfirmPassword = ({activeStep, steps, handleNext, handlePrev, handleChange, formValues, disabled, handleOnClick}) => {
+export const FormPassword = ({activeStep, steps, handleNext, handlePrev, handleChange, formValues, disabled, handleOnClick}) => {
     const stateSchema = {
-        confirmPassword: {value: formValues.confirmPassword, error: ""},
+        password: {value: formValues.password, error: ""}
     }
 
-    const step = 4;
+    const step = 3;
     const shown = activeStep > step;
 
     const stateValidatorSchema = {
@@ -48,19 +48,19 @@ export const FormConfirmPassword = ({activeStep, steps, handleNext, handlePrev, 
         showConfirmPassword: false
     })
 
-    const handleClickShowConfirmPassword = () => {
-        setShowConfirmPasswordValue({
-            showConfirmPassword: !showConfirmPasswordValue.showConfirmPassword
+    const handleClickShowPassword = () => {
+        setShowPasswordValue({
+            showPassword: !showPasswordValue.showPassword
         })
     }
 
-    const {password, confirmPassword} = values; 
+    const {password} = values; 
 
     const classes = useStyles();
 
     const onKeyDownHandler = e => {
         if (e.keyCode === 13) {
-          if (confirmPassword == formValues.password){
+          if (!errors.password){
               handleNext()
           }
         }
@@ -68,30 +68,33 @@ export const FormConfirmPassword = ({activeStep, steps, handleNext, handlePrev, 
 
     return (
         <div className="mainContainer formPassword" onClick={e => {handleOnClick(step)}} style={disabled ? (shown ? ({ opacity: "0.2"}): ({opacity: "0"})) : {}}>
-            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>{"Could you repeat that? I promise it'll stay secret!"}</Typography>
+            <Typography variant='h5' style={{color: '#999', textAlign: "center"}}>{"So " + formValues.firstName + " " + formValues.lastName + "? Allright, got it! Now select a password!"}</Typography>
             <div className={classes.formContainer}>
             {/*!disabled? (
             <Button className='backBtn' onClick={handlePrev}>Back</Button>
             ):null*/}
            
-                    <FormControl className={classes.inputField} variant='outlined' name='confirmPassword' >
-                        <InputLabel>Confirm Password</InputLabel>
+                    <FormControl className={classes.inputField} variant='outlined'>
+                        <InputLabel>Password</InputLabel>
                         {disabled ? (
-                        <OutlinedInput labelWidth={135} name='confirmPassword' value={confirmPassword} onChange={e => {handleOnChange(e); handleChange('confirmPassword', e)}} onKeyDown={onKeyDownHandler} disabled  type={showConfirmPasswordValue.showConfirmPassword ? "text" : "password"}/>):
-                        (<OutlinedInput className='onboardingField' labelWidth={135} name='confirmPassword' value={confirmPassword} onChange={e => {handleOnChange(e); handleChange('confirmPassword', e)}} onKeyDown={onKeyDownHandler}  type={showConfirmPasswordValue.showConfirmPassword ? "text" : "password"} endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton edge="end" onClick={handleClickShowConfirmPassword}>
-                                    {showConfirmPasswordValue.showConfirmPassword ? <Visibility/> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        } />)}
-                    {/*confirmPassword !== formValues.password ? (
-                        <Typography style={{color: "red"}}>Passwords do not match!</Typography>
-                    ): null*/}
+                            <OutlinedInput labelWidth={70} name='password' value={password} onChange={e => {handleOnChange(e); handleChange('password', e)}} onKeyDown={onKeyDownHandler} type={showPasswordValue.showPassword ? "text" : "password"}/>
+                        ):(
+                            <OutlinedInput className='onboardingField' labelWidth={70} name='password' value={password} onChange={e => {handleOnChange(e); handleChange('password', e)}} onKeyDown={onKeyDownHandler} type={showPasswordValue.showPassword ? "text" : "password"} endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton edge="end" onClick={handleClickShowPassword}>
+                                        {showPasswordValue.showPassword ? <Visibility/> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            } />
+                        )}
+
                     </FormControl>
+                    {errors.password && dirty.password && (
+                        <Typography style={{marginTop: '0', color: 'red', fontWeight: '200'}}>{errors.password}</Typography>
+                    )}
                     {
                         !disabled ? (
-                        confirmPassword !== formValues.password ? (
+                        errors.password ? (
                             <Button className="disabledBtn" disabled type='submit'>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
                         ): (
                             <Button className="nextBtn" type='submit' onClick={handleNext}>{activeStep === steps.length - 1 ? "Finish" : "Next"}</Button>
@@ -103,4 +106,4 @@ export const FormConfirmPassword = ({activeStep, steps, handleNext, handlePrev, 
     )
 }
 
-export default FormConfirmPassword
+export default FormPassword

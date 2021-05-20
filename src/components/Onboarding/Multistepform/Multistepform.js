@@ -8,6 +8,8 @@ import FormConfirmPassword from './FormConfirmPassword'
 import FormTask from './FormTask'
 import FormTerms from './FormTerms'
 import { Component } from 'react';
+import * as clientController from '../../../controllers/clientController'
+//import { environment } from '../../Environments.Environment';
 
 //export const FormEmail = ({activeStep, steps, handleNext, handleChange, formValues, disabled, handlePrev}) => {
 class Multistepform extends Component{
@@ -24,8 +26,7 @@ class Multistepform extends Component{
             task: '',
             terms: false,
             cookies: false
-        }
-
+        } 
 
     getSteps(){
         return ["EMAIL", "FIRST NAME", "LAST NAME", "PASSWORD", "CONFIRM PASSWORD", "TASK", "TERMS"];
@@ -72,7 +73,9 @@ class Multistepform extends Component{
     }
 
     handleSubmit = () => {
-        console.log("submit everything!")
+        clientController.register(this.state.firstName, this.state.lastName, this.state.email, this.state.task)
+
+        this.router.navigate(['/dashboard']);
     }
 
     triggerTerms = () => (
